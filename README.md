@@ -3,6 +3,7 @@
 Table of Contents
 - [Pre-Requirements](#pre-requirements)
 - [Setting Up ArchLinux in VirtualBox](#setting-up-archlinux-in-virtualbox)
+- [Starting up ArchLinux from VirtualBox](#starting-up-archlinux-from-virtualbox)
 
 ## Pre-Requirements
 
@@ -46,5 +47,34 @@ Table of Contents
 ![vm settings complete](images/ss3.png)
 
 You have successfully created the Arch Linux VM!
+
+## Starting up ArchLinux from VirtualBox
+
+1. Click on the ArchLinux VM that you have created in the previous step and click the "Start" button.
+
+- Note: This will open up a new terminal where we will be interacting with ArchLinux itself.
+
+- **Note:** It will take a little bit of time for ArchLinux to startup. Once it does, the screen should look as the image below.
+
+![start screen archlinux](images/ss4.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
