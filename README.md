@@ -8,6 +8,9 @@ Table of Contents
 - [Boot Mode Verification](#boot-mode-verification)
 - [Connecting to The Internet](#connecting-to-the-internet)
 - [Updating the System Clock](#updating-the-system-clock)
+- [Partitioning the Disks](#partitioning-the-disks)
+- [Partition Formatting](#partition-formatting)
+- [Mounting the File System](#mounting-the-file-system)
 
 ## Pre-Requirements
 
@@ -63,6 +66,8 @@ You have successfully created the Arch Linux VM!
 ![start screen archlinux](images/ss4.png)
 
 ## Setting the Keyboard Layout
+
+Section 1.5 of the ArchLinux Installation Guide.
 
 - Note: The default keyboard layout is set to English US. If this is your preferred layout, then skip this section.
 
@@ -120,13 +125,71 @@ You have successfully created the Arch Linux VM!
 
 ![set timezone](images/ss7.png)
 
+## Partitioning the Disks
 
+1. Identify the block device by using the command: `fdisk -l`.
 
+- Note: You can also use the `lsblk` command which is easier to read in my opinion.
 
+![partition disk list](images/ss8.png)
 
+2. To modify the partition tables, use the command: `fdisk /dev/*disk-to-patition*`. In my case, I will be partitioning `/dev/sda`.
 
+- Note: If you would like to create any stacked block devices such as LVM, system encryption, or RAID, this must be done so now.
 
+- Note: You can type `m` for the help page.
 
+![fdisk /dev/sda help command](images/ss9.png)
+
+3. I will be creating a new partition, so type `n`.
+
+4. I will be setting the partition type to extended, so type `p`.
+
+5. I will use the default partition number (1) and the First Sector set to default (2048), so hit `Enter` twice.
+
+4. The Last Sector will define the size of the partition, so I will set it to a random size, `7000`.
+
+- **Note:** Set the partition size according to your needs.
+
+5. To save changes, type `w`.
+
+![sda1](images/ss10.png)
+
+6. Verify that the extended partition now exists by using the `fdisk -l` or `lsblk` command.
+
+![verify sda1](images/ss11.png) 
+
+## Partition Formatting
+
+1. To format the newly created partitions, use either of the following commands:
+
+- To create an Ext4 file system, use the command: `mkfs.ext4 /dev/*device-name*`
+
+- If you created a "swap" partition, initialize it by using the commnad: `mkswap /dev/*swap-device-name*`
+
+- If you created an EFI system partition, you must format it to FAT32 by using the command: `mkfs.fat -F 32 /dev/*efi-system-partition*` 
+
+- **Note:** I will be using the Ext4 file system command.
+
+![ext file system format](image/ss12.png)
+
+## Mounting the File System
+
+1. To mount the file system we created, use the command: `mount /dev/sda1 /mnt`.
+
+- Note: This command will not give any outputs to the terminal.
+
+2. Create any remaining mounting points with the following commands:
+
+- For UEFI systems: `mount --mkdir /dev/*efi-system-partition* /mnt/boot`
+
+- For swap: `swapon /dev/*swap-partition*`
+
+3. Verify that the mount was successful by using the command: `lsblk`.
+
+- Note: `/mnt` has been added as the `MOUNTPOINTS` for `/dev/sda1`
+
+![mount point check](images/ss13.png)
 
 
 
