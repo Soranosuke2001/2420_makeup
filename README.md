@@ -6,6 +6,7 @@ Table of Contents
 - [Starting up ArchLinux from VirtualBox](#starting-up-archlinux-from-virtualbox)
 - [Setting the Keyboard Layout](#setting-the-keyboard-layout)
 - [Boot Mode Verification](#boot-mode-verification)
+- [Connecting to The Internet](#connecting-to-the-internet)
 
 ## Pre-Requirements
 
@@ -86,7 +87,23 @@ You have successfully created the Arch Linux VM!
 
 ![boot mode](images/ss5.png)
 
+## Connecting to The Internet
 
+1. To verify that the network interface is enabled, use the `ip link` command.
+
+- For Ethernet: You will only have to plug in the Ethernet cable.
+
+- For Wi-Fi: You must authenticate with the wireless network using the `iwctl` command.
+
+- For Mobile Broadband Modem: You must connect to the mobile network with the `mmcli` command.
+
+2. Test the connection by using the `ping` command to a destination.
+
+	`ping archlinux.org`
+
+- Note: A successful ping command will look similar to the image below.
+
+![testing internet connection](images/ss6.png)
 
 
 
