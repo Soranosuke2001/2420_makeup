@@ -4,6 +4,7 @@ Table of Contents
 - [Pre-Requirements](#pre-requirements)
 - [Setting Up ArchLinux in VirtualBox](#setting-up-archlinux-in-virtualbox)
 - [Starting up ArchLinux from VirtualBox](#starting-up-archlinux-from-virtualbox)
+- [Setting the Keyboard Layout](#setting-the-keyboard-layout)
 
 ## Pre-Requirements
 
@@ -58,9 +59,19 @@ You have successfully created the Arch Linux VM!
 
 ![start screen archlinux](images/ss4.png)
 
+## Setting the Keyboard Layout
 
+- Note: The default keyboard layout is set to English US. If this is your preferred layout, then skip this section.
 
+1. To view the list of keyboard layouts available, use the command: `ls /usr/share/kbd/keymaps/**/*.map.gz`
 
+2. To use a specific layout, use the command: `loadkeys *filename*`.
+
+- Note: Only include the filename and NOT the extension, `.map.gz` from the list of layouts available.
+
+3. (Optional) You can also set the font by using the `setfont` command.
+
+- Note: The list of font types can be displayed by using the command: `ls /usr/share/kbd/consolefonts`
 
 
 
