@@ -7,6 +7,7 @@ Table of Contents
 - [Setting the Keyboard Layout](#setting-the-keyboard-layout)
 - [Boot Mode Verification](#boot-mode-verification)
 - [Connecting to The Internet](#connecting-to-the-internet)
+- [Updating the System Clock](#updating-the-system-clock)
 
 ## Pre-Requirements
 
@@ -105,9 +106,19 @@ You have successfully created the Arch Linux VM!
 
 ![testing internet connection](images/ss6.png)
 
+## Updating the System Clock
 
+1. Use the `timedatectl status` command to verify the current time.
 
+- Note: The time and date should automatically be set to the correct time once a internet connection is secured.
 
+**If the timezone is not correct**
+
+2. Use the `timedatectl set-timezone *region*` to change the timezone.
+
+- I have changed my timezone to America/Vancouver in the image below.
+
+![set timezone](images/ss7.png)
 
 
 
