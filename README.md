@@ -5,6 +5,7 @@ Table of Contents
 - [Setting Up ArchLinux in VirtualBox](#setting-up-archlinux-in-virtualbox)
 - [Starting up ArchLinux from VirtualBox](#starting-up-archlinux-from-virtualbox)
 - [Setting the Keyboard Layout](#setting-the-keyboard-layout)
+- [Boot Mode Verification](#boot-mode-verification)
 
 ## Pre-Requirements
 
@@ -72,6 +73,18 @@ You have successfully created the Arch Linux VM!
 3. (Optional) You can also set the font by using the `setfont` command.
 
 - Note: The list of font types can be displayed by using the command: `ls /usr/share/kbd/consolefonts`
+
+## Boot Mode Verification
+
+1. Use the command: `ls /sys/firmware/efi/efivars` to have an understanding of which boot mode is being utilized.
+
+- If the command does not give an error, boot mode: UEFI
+
+- If the command does give an error, boot mode: BIOS or CSM
+
+- Note: Refer to the motherboard manual to set the desired boot mode.
+
+![boot mode](images/ss5.png)
 
 
 
