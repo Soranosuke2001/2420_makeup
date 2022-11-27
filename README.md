@@ -148,7 +148,7 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 5. I will use the default partition number (1) and the First Sector set to default (2048), so hit `Enter` twice.
 
-4. The Last Sector will define the size of the partition, so I will set it to a random size, `7000`.
+4. The Last Sector will define the size of the partition, so I will set it to, 7000000, which creates about 3.3Gb of space.
 
 - **Note:** Set the partition size according to your needs.
 
@@ -161,7 +161,7 @@ Section 1.5 of the ArchLinux Installation Guide.
 	- partition type: primary
 	- partition number: 2
 	- First Sector: default (hit `Enter`)
-	- Last Sector: The size of your choice, I used 5000000, which creates about 1.5Gb of storage
+	- Last Sector: The size of your choice, I used 20000000, which creates about 6.2Gb of storage
 
 7. Enter `w` to save changes.
 
@@ -245,10 +245,6 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 - Note: To view the list of packages available, visit this [Link](https://archlinux.org/packages/?name=man-pages)
 
-2. Since I will be installing the vim editor, I will also add it to the list of packages to be installed.
-
-- Command: `pacstrap -K /mnt base linux linux-firmware vim`
-
 The download should begin and the download progress should be similar to the image below.
 
 ![pacstrap command](images/ss15.png)
@@ -258,10 +254,16 @@ The download should begin and the download progress should be similar to the ima
 If you get the error message, `failed to synchronize all databases` try running the following commands in order:
 
 	```
-	pacman -Syu
+	pacman -Syy
+
+	pacman -S reflector
 	```
 
+or try running the command, `pacman -Syu` instead.
+
 When successful, the output should look similar to the image below.
+
+![download successful](images/ss20.png)
 
 
 
