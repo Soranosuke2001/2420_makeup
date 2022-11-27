@@ -156,9 +156,38 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 ![sda1](images/ss10.png)
 
-6. Verify that the extended partition now exists by using the `fdisk -l` or `lsblk` command.
+6. Create another new partition with the following configurations:
 
-![verify sda1](images/ss11.png) 
+	- partition type: primary
+	- partition number: 2
+	- First Sector: default (hit `Enter`)
+	- Last Sector: The size of your choice, I used 5000000, which creates about 1.5Gb of storage
+
+7. Enter `w` to save changes.
+
+![sda2](images/ss17.png)
+
+8. To change the partition type for `/dev/sda2` to swap, use the following commands in order:
+
+	```
+	fdisk /dev/sda
+
+	t
+
+	2
+
+	82
+	```
+
+9. Enter `w` to save changes. 
+
+![format /dev/sda2 to swap](images/ss18.png)
+
+- Note: You can check to see if the partition type was changed correctly by using the `fdisk -l` command.
+
+8. Verify that the extended partition now exists by using the `fdisk -l` or `lsblk` command.
+
+![verify sda1 and sda2](images/ss11.png)  
 
 ## Partition Formatting
 
@@ -170,9 +199,9 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 - If you created an EFI system partition, you must format it to FAT32 by using the command: `mkfs.fat -F 32 /dev/*efi-system-partition*` 
 
-- **Note:** I will be using the Ext4 file system command.
+- **Note:** I will be using the Ext4 file system command for /dev/sda1 and the swap command for /dev/sda2.
 
-![ext file system format](images/ss12.png)
+![file system format](images/ss12.png)
 
 ## Mounting the File System
 
@@ -188,7 +217,7 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 3. Verify that the mount was successful by using the command: `lsblk`.
 
-- Note: `/mnt` has been added as the `MOUNTPOINTS` for `/dev/sda1`
+- Note: `/mnt` has been added as the `MOUNTPOINTS` for `/dev/sda1` and `[SWAP]` has been added as the `MOUNTPOINTS` for `/dev/sda2`
 
 ![mount point check](images/ss13.png)
 
