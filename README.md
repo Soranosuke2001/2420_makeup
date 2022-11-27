@@ -12,6 +12,13 @@ Table of Contents
 - [Partition Formatting](#partition-formatting)
 - [Mounting the File System](#mounting-the-file-system)
 - [Select the Installation Mirrors](#select-the-installation-mirrors)
+- [Installing the Essential Packages](#installing-the-essential-packages)
+- [Configure the System](#configure-the-system) 
+- [Setting the Timezone](#setting-the-timezone)
+- [Localization](#localization)
+- [Network Configuration](#network-configuration)
+- [Initramfs Configuration](#initramfs-configuration)
+- [Setting the root Password](#setting-the-root-password)
 
 ## Pre-Requirements
 
@@ -265,6 +272,103 @@ When successful, the output should look similar to the image below.
 
 ![download successful](images/ss20.png)
 
+## Configure the System
+
+1. Generate a fstab file by using the command: `genfstab -U /mnt >> /mnt/etc/fstab`.
+
+2. Verify that the file you have just created by running the command: `vim /mnt/etc/fstab`.
+
+- Note: You should also edit any errors you notice in the file. The file generated should look similar to the image below.
+
+![fstab file](images/ss21.png)
+
+## Change root
+
+1. Change the apparent root directory by running the command: `arch-chroot /mnt`.
+
+If everything was setup correctly, the terminal is going to slightly change like the image below.
+
+![arch root](images/ss22.png)
+
+## Setting the Timezone
+
+1. Set the timezone by running the command: `ln -sf /usr/share/zoneinfo/America/Vancouver /etc/localtime`.
+
+2. To generate the hardware clock time, use the command: `hwclock --systohc`.
+
+- Note: The timezone by default is UTC.
+
+## Localization
+
+1. Uncomment the following contents in the file `/etc/locale.gen`.
+
+- Note: I am using the `vim` tool which is not installed by default. To install it, use the command: `pacstrap -K /mnt vim` in the previous Linux environment.
+
+![uncomment](images/ss23.png)
+
+2. Generate the locales by running the command: `locale-gen`.
+
+If successful, you should get a similar output to the image below.
+
+![locale-gen command](images/ss24.png)
+
+3. Create the file `/etc/locale.conf` by using the command: `vim /etc/locale.conf`.
+
+4. In the file, add `LANG=en_US.UTF-8` then save the file.
+
+5. (Optional) If you require a different keyboard layout, add the keyboard layout to the file `/etc/vconsole.conf`.
+
+Example: Adding the German keyboard layout.
+
+Contents of the `/etc/vconsole.conf` file:
+
+	```
+	KEYMAP=de-latin1
+	```
+
+## Network Configuration
+
+1. Create the `/etc/hostname` file and add the hostname you would like to set it to.
+
+- Note: Only the name you would like to set it to should be included in the file.
+
+Example: I will set mine to "admin"
+
+![hostname](images/ss25.png)
+
+2. Setup the network configuration. You must install the required network manager package in the previous Linux environment.
+
+- Note: Mine is already setup. If you have also setting this up through VirtualBox, this is done as well.
+
+3. Verify that the network is functioning by using the following command: `ping archlinux.org`
+
+If successful, the output should look similar to the image below.
+
+![ping test](images/ss26.png)
+
+---
+
+## Initramfs Configuration
+
+- **Note:** This step is usually not required, but for LVM, system encryption, or RAID you may want to consider the following steps.
+
+1. Edit the `mkinitcpio.conf` file.
+
+- Note: More info on `mkinitcpio.conf` can be found from this [Link](https://man.archlinux.org/man/mkinitcpio.conf.5)
+
+2. Recreate the initramfs image by using the command: `mkinitcpio -P`
+
+---
+
+## Setting the root Password
+
+1. Use the command, `passwd` to set the password for the root user. The output should be similar to the image below.
+
+![root password](images/ss27.png)
+
+---
+
+## Boot Loader
 
 
 
