@@ -11,6 +11,7 @@ Table of Contents
 - [Partitioning the Disks](#partitioning-the-disks)
 - [Partition Formatting](#partition-formatting)
 - [Mounting the File System](#mounting-the-file-system)
+- [Select the Installation Mirrors](#select-the-installation-mirrors)
 
 ## Pre-Requirements
 
@@ -171,7 +172,7 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 - **Note:** I will be using the Ext4 file system command.
 
-![ext file system format](image/ss12.png)
+![ext file system format](images/ss12.png)
 
 ## Mounting the File System
 
@@ -190,6 +191,54 @@ Section 1.5 of the ArchLinux Installation Guide.
 - Note: `/mnt` has been added as the `MOUNTPOINTS` for `/dev/sda1`
 
 ![mount point check](images/ss13.png)
+
+## Select the Installation Mirrors
+
+- **Important Note:** The packages that will be installed is defined in `/etc/pacman.d/mirrorlist`. This file will later be copied so you should verify that the file is correct.
+
+1. To edit the file, use the command `vim /etc/pacman.d/mirrorlist`. The contents of the file should look similar to the image below.
+
+![mirrorlist](images/ss14.png)
+
+- Note: The top of the package list has a higher priority, so if you wish to have one of the packages with a higher download priority, place it at the top of the list.
+
+## Installing the Essential Packages
+
+1. Install the base package by using the command: `pacstrap -K /mnt base linux linux-firmware`
+
+- Note: The base package does not include all tools from the live installation. You may want to consider the following packages:
+
+  - userspace utilities: management of the file systems
+  - other utilities: accessing RAID or LVM partitions
+  - specific firmware for other devices that is not included in the linux-firmware already being installed
+  - networking softwares
+  - text editor
+
+- Note: To view the list of packages available, visit this [Link](https://archlinux.org/packages/?name=man-pages)
+
+2. Since I will be installing the vim editor, I will also add it to the list of packages to be installed.
+
+- Command: `pacstrap -K /mnt base linux linux-firmware vim`
+
+The download should begin and the download progress should be similar to the image below.
+
+![pacstrap command](images/ss15.png)
+
+**Trouble Shooting**
+
+If you get the error message, `failed to synchronize all databases` try running the following commands in order:
+
+	```
+	pacman -Syu
+	```
+
+When successful, the output should look similar to the image below.
+
+
+
+
+
+
 
 
 
