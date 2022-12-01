@@ -22,11 +22,15 @@ Table of Contents
 - [Installing the GRUB Boot Loader](#installing-the-grub-boot-loader)
 - [GRUB Configuration File](#grub-configuration-file)
 
+---
+
 ## Pre-Requirements
 
 1. You must have the ISO file pre-installed. You can visit the archlinux download page from this [Link](https://archlinux.org/download/)
 
 2. You have VirtualBox installed.
+
+---
 
 ## Setting Up ArchLinux in VirtualBox
 
@@ -65,6 +69,8 @@ Table of Contents
 
 You have successfully created the Arch Linux VM!
 
+---
+
 ## Starting up ArchLinux from VirtualBox
 
 1. Click on the ArchLinux VM that you have created in the previous step and click the "Start" button.
@@ -75,7 +81,11 @@ You have successfully created the Arch Linux VM!
 
 ![start screen archlinux](images/ss4.png)
 
+---
+
 ## Setting the Keyboard Layout
+
+**Section 1.5 of Official ArchLinux Installation Guide**
 
 Section 1.5 of the ArchLinux Installation Guide.
 
@@ -91,7 +101,11 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 - Note: The list of font types can be displayed by using the command: `ls /usr/share/kbd/consolefonts`
 
+---
+
 ## Boot Mode Verification
+
+**Section 1.6 of Official ArchLinux Installation Guide**
 
 1. Use the command: `ls /sys/firmware/efi/efivars` to have an understanding of which boot mode is being utilized.
 
@@ -103,7 +117,11 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 ![boot mode](images/ss5.png)
 
+---
+
 ## Connecting to The Internet
+
+**Section 1.7 of Official ArchLinux Installation Guide**
 
 1. To verify that the network interface is enabled, use the `ip link` command.
 
@@ -121,7 +139,11 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 ![testing internet connection](images/ss6.png)
 
+---
+
 ## Updating the System Clock
+
+**Section 1.8 of Official ArchLinux Installation Guide**
 
 1. Use the `timedatectl status` command to verify the current time.
 
@@ -135,7 +157,11 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 ![set timezone](images/ss7.png)
 
+---
+
 ## Partitioning the Disks
+
+**Section 1.9 of Official ArchLinux Installation Guide**
 
 1. Identify the block device by using the command: `fdisk -l`.
 
@@ -198,7 +224,11 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 ![verify sda1 and sda2](images/ss11.png)  
 
+---
+
 ## Partition Formatting
+
+**Section 1.10 of Official ArchLinux Installation Guide**
 
 1. To format the newly created partitions, use either of the following commands:
 
@@ -212,7 +242,11 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 ![file system format](images/ss12.png)
 
+---
+
 ## Mounting the File System
+
+**Section 1.11 of Official ArchLinux Installation Guide**
 
 1. To mount the file system we created, use the command: `mount /dev/sda1 /mnt`.
 
@@ -230,7 +264,11 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 ![mount point check](images/ss13.png)
 
+---
+
 ## Select the Installation Mirrors
+
+**Section 2.1 of Official ArchLinux Installation Guide**
 
 - **Important Note:** The packages that will be installed is defined in `/etc/pacman.d/mirrorlist`. This file will later be copied so you should verify that the file is correct.
 
@@ -240,7 +278,11 @@ Section 1.5 of the ArchLinux Installation Guide.
 
 - Note: The top of the package list has a higher priority, so if you wish to have one of the packages with a higher download priority, place it at the top of the list.
 
+---
+
 ## Installing the Essential Packages
+
+**Section 2.1 of Official ArchLinux Installation Guide**
 
 1. Install the base package by using the command: `pacstrap -K /mnt base linux linux-firmware`
 
@@ -274,7 +316,11 @@ When successful, the output should look similar to the image below.
 
 ![download successful](images/ss20.png)
 
+---
+
 ## Configure the System
+
+**Section 3.1 of Official ArchLinux Installation Guide**
 
 1. Generate a fstab file by using the command: `genfstab -U /mnt >> /mnt/etc/fstab`.
 
@@ -284,7 +330,11 @@ When successful, the output should look similar to the image below.
 
 ![fstab file](images/ss21.png)
 
+---
+
 ## Change root
+
+**Section 3.2 of Official ArchLinux Installation Guide**
 
 1. Change the apparent root directory by running the command: `arch-chroot /mnt`.
 
@@ -292,7 +342,11 @@ If everything was setup correctly, the terminal is going to slightly change like
 
 ![arch root](images/ss22.png)
 
+---
+
 ## Setting the Timezone
+
+**Section 3.3 of Official ArchLinux Installation Guide**
 
 1. Set the timezone by running the command: `ln -sf /usr/share/zoneinfo/America/Vancouver /etc/localtime`.
 
@@ -300,7 +354,11 @@ If everything was setup correctly, the terminal is going to slightly change like
 
 - Note: The timezone by default is UTC.
 
+---
+
 ## Localization
+
+**Section 3.4 of Official ArchLinux Installation Guide**
 
 1. Uncomment the following contents in the file `/etc/locale.gen`.
 
@@ -328,7 +386,11 @@ Contents of the `/etc/vconsole.conf` file:
 	KEYMAP=de-latin1
 	```
 
+---
+
 ## Network Configuration
+
+**Section 3.5 of Official ArchLinux Installation Guide**
 
 1. Create the `/etc/hostname` file and add the hostname you would like to set it to.
 
@@ -352,6 +414,8 @@ If successful, the output should look similar to the image below.
 
 ## Initramfs Configuration
 
+**Section 3.6 of Official ArchLinux Installation Guide**
+
 - **Note:** This step is usually not required, but for LVM, system encryption, or RAID you may want to consider the following steps.
 
 1. Edit the `mkinitcpio.conf` file.
@@ -364,6 +428,8 @@ If successful, the output should look similar to the image below.
 
 ## Setting the root Password
 
+**Section 3.7 of Official ArchLinux Installation Guide**
+
 1. Use the command, `passwd` to set the password for the root user. The output should be similar to the image below.
 
 ![root password](images/ss27.png)
@@ -371,6 +437,8 @@ If successful, the output should look similar to the image below.
 ---
 
 ## Installing the GRUB Boot Loader
+
+**Section 3.8 of Official ArchLinux Installation Guide**
 
 1. Check which partition table you are currently using by using the `gdisk -l /dev/sda` command.
 
@@ -396,6 +464,8 @@ If the installation was successful, the output should be similar to the image be
 
 ![grub installation](images/ss30.png)
 
+---
+
 ## GRUB Configuration File
 
 1. Generate the grub config file by using the `grub-mkconfig -o /boot/grub/grub.cfg` command.
@@ -404,7 +474,11 @@ If successful, the command output should be similar to the image below.
 
 ![grub config creation](images/ss31.png)
 
+---
+
 ## Reboot
+
+**Section 4 of Official ArchLinux Installation Guide**
 
 1. Exit out of the current Linux environment by using the `exit` command.
 
@@ -415,6 +489,8 @@ If successful, the command output should be similar to the image below.
 3. Restart the machine by using the `reboot` command.
 
 - Note: Any partitions still mounted will automatically be unmounted.
+
+---
 
 ## Booting into ArchLinux
 
@@ -434,7 +510,11 @@ If successful, the command output should be similar to the image below.
 
 Congratulations! You have successfully completed installing ArchLinux.
 
+---
+
 ## Post-Installation
+
+**Section 5 of Official ArchLinux Installation Guide**
 
 There is a list of general recommendations you should follow after completing the installation. You can view the list by following this [Link](https://wiki.archlinux.org/title/General_recommendations).
 
