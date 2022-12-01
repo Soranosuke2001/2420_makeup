@@ -19,6 +19,8 @@ Table of Contents
 - [Network Configuration](#network-configuration)
 - [Initramfs Configuration](#initramfs-configuration)
 - [Setting the root Password](#setting-the-root-password)
+- [Installing the GRUB Boot Loader](#installing-the-grub-boot-loader)
+- [GRUB Configuration File](#grub-configuration-file)
 
 ## Pre-Requirements
 
@@ -368,9 +370,75 @@ If successful, the output should look similar to the image below.
 
 ---
 
-## Boot Loader
+## Installing the GRUB Boot Loader
 
+1. Check which partition table you are currently using by using the `gdisk -l /dev/sda` command.
 
+- Note: The gdisk command is not installed by default, so you will need to download it using the `pacman -S gptfdisk` command.
+
+![gdisk -l /dev/sda](images/ss28.png)
+
+- Note: After running the command, the output shows that I am currently using the MBR partition table.
+
+2. Complete the specific instructions before proceeding with the following instructions from this [Link](https://wiki.archlinux.org/title/GRUB).
+
+- For GPT, follow the GUID Partition Table (GPT) specific instructions in the link.
+
+- For MBR, follow the Master Boot Record (MBR) specific instructions in the link.
+
+3. Install the grub package by using the `pacman -S grub` command. The output should look similar to the image below.
+
+![pacman -S grub](images/ss29.png)
+
+4. Then install grub on the specific device name using the `grub-install --target=i386-pc /dev/sda` command.
+
+If the installation was successful, the output should be similar to the image below.
+
+![grub installation](images/ss30.png)
+
+## GRUB Configuration File
+
+1. Generate the grub config file by using the `grub-mkconfig -o /boot/grub/grub.cfg` command.
+
+If successful, the command output should be similar to the image below.
+
+![grub config creation](images/ss31.png)
+
+## Reboot
+
+1. Exit out of the current Linux environment by using the `exit` command.
+
+- You should notice that the command prompt reverts back to the original environment we were in.
+
+2. (Optional) Unmount all partitions by using the `unmount -R /mnt` command.
+
+3. Restart the machine by using the `reboot` command.
+
+- Note: Any partitions still mounted will automatically be unmounted.
+
+## Booting into ArchLinux
+
+1. When prompted to select the boot disk, select the "Boot existing OS" option.
+
+![boot into exisitng os](images/ss32.png)
+
+2. Select the "Arch Linux" option.
+
+![arch linux](images/ss33.png)
+
+3. Once the booting process is complete, login to the root user. The password is the same password from when we created the password previously.
+
+4. If the lgin was successful, interface will look similar to the image below.
+
+![arch linux](images/ss34.png)
+
+Congratulations! You have successfully completed installing ArchLinux.
+
+## Post-Installation
+
+There is a list of general recommendations you should follow after completing the installation. You can view the list by following this [Link](https://wiki.archlinux.org/title/General_recommendations).
+
+There is also a list of applications you may be interested in. More details can be found from this [Link](https://wiki.archlinux.org/title/List_of_applications).
 
 
 
